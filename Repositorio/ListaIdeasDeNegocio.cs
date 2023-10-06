@@ -8,10 +8,9 @@ using static Proyecto3MVC.Models.Exceptions;
 
 namespace Proyecto3MVC.Repositorio
 {
-    public class ListaIdeasDeNegocio
+    public static class ListaIdeasDeNegocio
     {
-        Exception excepciones = new Exception();
-        static List<IdeaDeNegocio> IdeasDeNegocio;
+        static List<IdeaDeNegocio> IdeasDeNegocio = null;
 
         static ListaIdeasDeNegocio()
         {
@@ -41,7 +40,7 @@ namespace Proyecto3MVC.Repositorio
 
         }
 
-        public static void actualizarListaDeIdeas(IdeaDeNegocio idea) 
+        public static void actualizarIdeaEditada(IdeaDeNegocio idea) 
         {
             IdeaDeNegocio ideaActualizada = IdeasDeNegocio.Find(i => i.Codigo == idea.Codigo);
             ideaActualizada.ValorInversion = idea.ValorInversion;
@@ -51,24 +50,12 @@ namespace Proyecto3MVC.Repositorio
 
         public static void eliminarIntegrante(IdeaDeNegocio idea, string integranteId)
         {
-            try
-            {
-                int integranteIdInt = int.Parse(integranteId);
-                IdeaDeNegocio ideaIntegrante = IdeasDeNegocio.Find(i => i.Codigo == idea.Codigo);
-                Integrante integrante = ideaIntegrante.Integrantes.Find(i => i.Id == integranteId);
 
-                if (integrante == null)
-                {
-                    throw InvalidIntegranteIdException("No se encontró un integrante con el ID proporcionado.");
-                }
-
-                ideaIntegrante.Integrantes.Remove(integrante);
-            }
-            catch (FormatException)
-            {
-                throw IdDeParticipanteInvalidoException("El valor proporcionado no es un número entero válido.");
-
-            }
+            int integranteIdInt = int.Parse(integranteId);
+            Integrante integrante = idea.Integrantes.Find(i => i.Id == integranteId);
+            idea.Integrantes.Remove(integrante);
+        }
+  
 
 
 

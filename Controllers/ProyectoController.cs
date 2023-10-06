@@ -1,4 +1,5 @@
-﻿using Proyecto3MVC.Services;
+﻿using Proyecto3MVC.Repositorio;
+using Proyecto3MVC.Services;
 using Proyecto3MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,12 @@ namespace Proyecto3MVC.Controllers
     public class ProyectoController : Controller
     {
 
-        private static ListaIdeasDeNegocio listaIdeasDeNegocio = new ListaIdeasDeNegocio();
+        ListaIdeasDeNegocioRepositorio listaIdeas = new ListaIdeasDeNegocioRepositorio();
 
         // GET: Lista de las ideas de negocio.
       public ActionResult Index() 
         {
-            List<IdeaDeNegocio> ideas = listaIdeasDeNegocio.obtenerLista();
+            List<IdeaDeNegocio> ideas = listaIdeas.obtenerLista();
             return View(ideas);
         }
         //Metodo Get: muestra formulario usuario llenar
@@ -30,7 +31,7 @@ namespace Proyecto3MVC.Controllers
         [HttpPost]
         public ActionResult BtnRegistrarIdea()
         {
-            List<IdeaDeNegocio> ideas = listaIdeasDeNegocio.obtenerLista();
+            List<IdeaDeNegocio> ideas = listaIdeas.obtenerLista();
             int codigo = ideas.Count + 1;
             string nombre = Request.Form["Nombre"].ToString();
             string impacto = Request.Form["Impacto"].ToString();
@@ -48,14 +49,9 @@ namespace Proyecto3MVC.Controllers
                 departamentos.Add(depto);
             }
 
-            if (valorInversion <= 0 || totalIngresos <= 0 || valorInversionEnInfraestructura <= 0)
-            {
-                throw new ValoresNumericosInvalidoException("Los valores de inversión, valor de ingresos y total ingreesos deben ser mayores que cero.");
-            }
-
             IdeaDeNegocio idea = new IdeaDeNegocio(codigo, nombre, impacto, departamentos, valorInversion, totalIngresos,
             valorInversionEnInfraestructura, herramientas4RI);
-            listaIdeasDeNegocio.agregarIdea(idea);
+            listaIdeas.agregarIdea(idea);
 
 
             return View(idea);

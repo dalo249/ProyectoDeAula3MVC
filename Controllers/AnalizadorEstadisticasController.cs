@@ -1,4 +1,5 @@
 ﻿using Proyecto3MVC.Models;
+using Proyecto3MVC.Repositorio;
 using Proyecto3MVC.Services;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,12 @@ namespace Proyecto3MVC.Controllers
     {
 
         AnalizadorEstadisticas analizador = new AnalizadorEstadisticas();
-        ListaIdeasDeNegocio listaIdeasDeNegocio = new ListaIdeasDeNegocio();
-     
+        ListaIdeasDeNegocioRepositorio listaIdeas = new ListaIdeasDeNegocioRepositorio();
+
 
         public ActionResult Index()
         {
-            List<IdeaDeNegocio> ideasDeNegocio = listaIdeasDeNegocio.obtenerLista();
+            List<IdeaDeNegocio> ideasDeNegocio = listaIdeas.obtenerLista();
 
 
             IdeaDeNegocio ideaMayorDeptos = analizador.ideaMayorDepartamentos(ideasDeNegocio);
