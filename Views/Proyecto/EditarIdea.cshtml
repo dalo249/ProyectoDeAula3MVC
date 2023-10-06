@@ -1,10 +1,65 @@
-﻿
+﻿@model Proyecto3MVC.Models.IdeaDeNegocio
 @{
     ViewBag.Title = "Editar Idea";
 }
 
-<h2>Aca puedes: </h2>
-<p>1. Agregar integrante</p>
-<p>2.Eliminar integrante</p>
-<p>3. cambiar valor de inversion</p>
-<p>4. cambiar total de ingresos</p>
+<h1>Registrar Idea De Negocio</h1>
+<p> Rellena todos los campos para registrar una nueva idea de negocio </p>
+<br>
+@using (Html.BeginForm("btnRegistrarIdea", "Proyecto", FormMethod.Post))
+{
+    <form method="post">
+        <input type="hidden" name="Codigo" value="@Model.IdeaDeNegocio.Codigo"
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Nombre</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="Nombre" value="">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Impacto social</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="Impacto" value="">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Departamentos beneficiados <br>(Separados por comas)</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="Departamentos" value="">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Valor de inversion</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="ValorInversion" value="">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Total de ingresos ultimos 3 años</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="TotalIngresos" value="">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Herramientas de 4RI<br>(separadas por comas)</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="Herramientas4RI" value="">
+            </div>
+        </div>
+
+        <p>ViewBag.mensajeError</p>
+        <p>ViewBag.mensajeExito</p>
+
+        <div class="row mb-3">
+            <div class="offset-sm-3 col-sm-3 d-grid">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+            <div class="col-sm-3 d-grid">
+                <a class="btn btn-outline-primary" href="/Proyecto/Index" role="button">Cancelar</a>
+            </div>
+
+        </div>
+
+    </form>
+
+}

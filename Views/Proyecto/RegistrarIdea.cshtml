@@ -3,7 +3,7 @@
     ViewBag.Title = "RegistrarIdeaDeNegocio";
 }
 
-<h2>Registrar Idea De Negocio</h2>
+<h1>Registrar Idea De Negocio</h1>
 <p> Rellena todos los campos para registrar una nueva idea de negocio </p>
 <br>
 @using (Html.BeginForm("btnRegistrarIdea", "Proyecto", FormMethod.Post))
@@ -40,14 +40,17 @@
             </div>
         </div>
         <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Valor de inversion <br>en infraestructuras</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="ValorInversionInfraestructura" value="">
+            </div>
+        </div>
+        <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Herramientas de 4RI<br>(separadas por comas)</label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="Herramientas4RI" value="">
             </div>
         </div>
-
-        <p>ViewBag.mensajeError</p>
-        <p>ViewBag.mensajeExito</p>
 
         <div class="row mb-3">
             <div class="offset-sm-3 col-sm-3 d-grid">

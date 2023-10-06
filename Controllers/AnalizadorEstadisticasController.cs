@@ -12,13 +12,32 @@ namespace Proyecto3MVC.Controllers
     {
 
         AnalizadorEstadisticas analizador = new AnalizadorEstadisticas();
-        List<IdeaDeNegocio> listaIdeasDeNegocio = new List<IdeaDeNegocio>();
+        ListaIdeasDeNegocio listaIdeasDeNegocio = new ListaIdeasDeNegocio();
+     
+
         public ActionResult Index()
         {
-            var ideasService = new IdeasDeNegocioServices();
-            List<IdeaDeNegocio> ideas = ideasService.obtenerIdeasDeNegocio();
-            listaIdeasDeNegocio = ideas;
-            return View();
+            List<IdeaDeNegocio> ideasDeNegocio = listaIdeasDeNegocio.obtenerLista();
+
+
+            IdeaDeNegocio ideaMayorDeptos = analizador.ideaMayorDepartamentos(ideasDeNegocio);
+            IdeaDeNegocio ideaMayorTotalIngresos = analizador.ideaMayorTotalIngresos(ideasDeNegocio);
+            IdeaDeNegocio ideaMasHerramientas4RI = analizador.ideaMayorHerramientas4RI(ideasDeNegocio);
+            IdeaDeNegocio ideaMayorInversionInfraestructura = analizador.ideaMayorInversionInfraestructura(ideasDeNegocio);
+            List<IdeaDeNegocio> ideasMayorRentabilidad = analizador.ideasMayorRentabilidad(ideasDeNegocio);
+            List<IdeaDeNegocio> ideasMas3Departamentos = analizador.ideasMas3Departamentos(ideasDeNegocio);
+            List<IdeaDeNegocio> ideasUsanDesarrolloSostenible = analizador.ideasUsanDesarrolloSostenible(ideasDeNegocio);
+            List<IdeaDeNegocio> ideasRentabilidadMayorPromedio = analizador.ideasRentabilidadMayorPromedio(ideasDeNegocio);
+            List<IdeaDeNegocio> ideasUsanTerritoriosOTransicion = analizador.ideasUsanTerritoriosOTransicion(ideasDeNegocio);
+            double sumaTotalDeIngresos = analizador.SumarTotalIngresosIdeas(ideasDeNegocio);
+            double sumaTotalInversiones = analizador.SumarTotalInversionIdeas(ideasDeNegocio);
+            int totalIdeasUsanIA = analizador.ideasUsanIA(ideasDeNegocio);
+
+            Estadistica estadistica = new Estadistica(ideaMayorDeptos, ideaMayorTotalIngresos, ideaMasHerramientas4RI, ideaMayorInversionInfraestructura, ideasMayorRentabilidad,
+                ideasMas3Departamentos, ideasUsanDesarrolloSostenible, ideasRentabilidadMayorPromedio, ideasUsanTerritoriosOTransicion, sumaTotalDeIngresos, sumaTotalInversiones,
+                totalIdeasUsanIA);
+
+            return View(estadistica);
         }
 
        

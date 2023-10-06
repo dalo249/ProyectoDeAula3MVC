@@ -5,32 +5,56 @@
 
 
 <body>
-    <h2>BtnRegistrarIdea</h2>
-    <h2>Codigo de la nueva idea: @Model.Codigo</h2>
-    <h2>la idea @Model.Nombre se registro correctamente</h2>
-    <div>
-        <h3>Paciente registrado con éxito</h3>
-        <form>
+    <h1>Idea de negocio registrada con exito.</h1>
+    <h7>Informacion de la idea de negocio.</h7>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Valor de inversion</th>
+                <th>Total de ingresos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Codigo</td>
+                <td>@Model.Nombre</td>
+                <td>@Model.ValorInversion</td>
+                <td>@Model.TotalIngresos</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Impacto</th>
+                <th>Departamentos</th>
+                <th>Herramientas de 4 R.I</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Impacto</td>
+                <td>
+                    <ul class="list-group">
+                        @foreach (var depto in Model.Departamentos)
+                        {
+                            <li>@depto.Nombre</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <ul class="list-group">
+                        @foreach (var herramienta in Model.Herramientas4RI)
+                        {
+                            <li>@herramienta</li>
+                        }
+                    </ul>
+                </td>
 
-            <table>
-
-                <tr>
-                    <td><label>Codigo: @Model.Codigo </label></td>
-                </tr>
-                <tr>
-                    <td><label>Nombre: @Model.Nombre</label></td>
-                </tr>
-                <tr>
-                    <td><label>Apellidos: @Model.Impacto</label></td>
-                </tr>
-                <tr>
-                    <td><label>Valor de inversion: @Model.ValorInversion.ToString()</label></td>
-                </tr>
-                <tr>
-                    <td><label>Total de ingresos: @Model.TotalIngresos.ToString()</label></td>
-                </tr>
-            </table>
-        </form>
-    </div>
+            </tr>
+        </tbody>
+    </table>
 </body>
 

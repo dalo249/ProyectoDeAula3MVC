@@ -9,19 +9,20 @@ namespace Proyecto3MVC.Models
     public class IdeaDeNegocio
     {
         
-        public int Codigo { get; }
+        public int Codigo { get; set; }
         public string Nombre { get; set; }
         public string Impacto { get; set; }
         public List<Departamento> Departamentos { get; set; }
         public double ValorInversion { get; set; }
         public double TotalIngresos { get; set; }
+        public double ValorInversionInfraestructura { get; set; }
         public List<Integrante> Integrantes { get; set; }
         public List<string> Herramientas4RI { get; set; }
 
         public List<Departamento> DepartamentosGlobal { get; set; }
 
         public IdeaDeNegocio(int codigo, string nombre, string impacto, List<Departamento> departamentos, double valorInversion,
-            double totalIngresos, List<string> herramientas4RI)
+            double totalIngresos, double valorInversionInfraestructura,List<string> herramientas4RI)
         {
             Codigo = codigo;
             Nombre = nombre;
@@ -29,6 +30,7 @@ namespace Proyecto3MVC.Models
             Departamentos = departamentos;
             ValorInversion = valorInversion;
             TotalIngresos = totalIngresos;
+            ValorInversionInfraestructura = valorInversionInfraestructura;
             Integrantes = new List<Integrante>();
             Herramientas4RI = herramientas4RI;
 

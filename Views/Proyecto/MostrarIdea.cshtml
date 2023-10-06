@@ -3,7 +3,56 @@
     ViewBag.Title = "MostrarIdea";
 }
 
-<h2>Aca se muestra toda la informacion de la idea de negocio con registro exitoso</h2>
-<p>Codigo de la idea: @Model.Codigo</p>
-<p>Nombre de la idea: @Model.Nombre </p>
+<body>
+    <h1>Informacion de la idea de Negocio.</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Valor de inversion</th>
+                <th>Total de ingresos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Codigo</td>
+                <td>@Model.Nombre</td>
+                <td>@Model.ValorInversion</td>
+                <td>@Model.TotalIngresos</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Impacto</th>
+                <th>Departamentos</th>
+                <th>Herramientas de 4 R.I</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Impacto</td>
+                <td>
+                    <ul class="list-group">
+                        @foreach (var depto in Model.Departamentos)
+                        {
+                            <li>@depto.Nombre</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <ul class="list-group">
+                        @foreach (var herramienta in Model.Herramientas4RI)
+                        {
+                            <li>@herramienta</li>
+                        }
+                    </ul>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</body>
 

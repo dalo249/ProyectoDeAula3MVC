@@ -7,70 +7,90 @@ namespace Proyecto3MVC.Models
 {
     public class AnalizadorEstadisticas
     {
-        public IdeaDeNegocio ideaMayorDepartamentos(Proyecto proyecto)
+        
+
+        public IdeaDeNegocio ideaMayorDepartamentos(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            IdeaDeNegocio mayorDepartamentos = proyecto.seleccionarListaIdeasDeNegocio().OrderByDescending(i => i.Departamentos.Count).FirstOrDefault();
+            IdeaDeNegocio mayorDepartamentos = ideasDeNegocio.OrderByDescending(i => i.Departamentos.Count).FirstOrDefault();
             return mayorDepartamentos;
 
         }
 
-        public IdeaDeNegocio ideaMayorTotalIngresos(Proyecto proyecto)
+        public IdeaDeNegocio ideaMayorTotalIngresos(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            IdeaDeNegocio mayorIngresos = proyecto.seleccionarListaIdeasDeNegocio().OrderByDescending(i => i.TotalIngresos).FirstOrDefault();
+            IdeaDeNegocio mayorIngresos = ideasDeNegocio.OrderByDescending(i => i.TotalIngresos).FirstOrDefault();
             return mayorIngresos;
 
         }
 
-        public List<IdeaDeNegocio> ideasMayorRentabilidad(Proyecto proyecto)
+        public List<IdeaDeNegocio> ideasMayorRentabilidad(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            List<IdeaDeNegocio> ideasRentables = proyecto.seleccionarListaIdeasDeNegocio().OrderByDescending(i => i.TotalIngresos).Take(3).ToList();
+            List<IdeaDeNegocio> ideasRentables = ideasDeNegocio.OrderByDescending(i => i.TotalIngresos).Take(3).ToList();
             return ideasRentables;
 
         }
 
-        public List<IdeaDeNegocio> ideasMas3Departamentos(Proyecto proyecto)
+        public List<IdeaDeNegocio> ideasMas3Departamentos(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            var ideasMasDepartamentos = proyecto.seleccionarListaIdeasDeNegocio().Where(i => i.Departamentos.Count > 3).ToList();
+            var ideasMasDepartamentos = ideasDeNegocio.Where(i => i.Departamentos.Count > 3).ToList();
             return ideasMasDepartamentos;
         }
 
-        public double SumarTotalIngresosIdeas(Proyecto proyecto)
+        public double SumarTotalIngresosIdeas(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            double sumaTotalIngresos = proyecto.seleccionarListaIdeasDeNegocio().Sum(i => i.TotalIngresos);
+            double sumaTotalIngresos = ideasDeNegocio.Sum(i => i.TotalIngresos);
             return sumaTotalIngresos;
         }
 
-        public double SumarTotalInversionIdeas(Proyecto proyecto)
+        public double SumarTotalInversionIdeas(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            double sumaTotalInversion = proyecto.seleccionarListaIdeasDeNegocio().Sum(i => i.ValorInversion);
+            double sumaTotalInversion = ideasDeNegocio.Sum(i => i.ValorInversion);
             return sumaTotalInversion;
         }
 
-        public IdeaDeNegocio ideaMayorHerramientas4RI(Proyecto proyecto)
+        public IdeaDeNegocio ideaMayorHerramientas4RI(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            IdeaDeNegocio mayorHerramientas4RI = proyecto.seleccionarListaIdeasDeNegocio().OrderByDescending(i => i.Herramientas4RI.Count).FirstOrDefault();
+            IdeaDeNegocio mayorHerramientas4RI = ideasDeNegocio.OrderByDescending(i => i.Herramientas4RI.Count).FirstOrDefault();
             return mayorHerramientas4RI;
         }
 
-        public int ideasUsanIA(Proyecto proyecto)
+        public int ideasUsanIA(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            int ideasUsanIA = proyecto.seleccionarListaIdeasDeNegocio().Where(i => i.Herramientas4RI.Contains("inteligencia artificial")).Count();
+            int ideasUsanIA = ideasDeNegocio.Where(i => i.Herramientas4RI.Contains("Inteligencia artificial")).Count();
             return ideasUsanIA;
         }
 
-        public List<IdeaDeNegocio> ideasUsanDesarrolloSostenible(Proyecto proyecto)
+        public List<IdeaDeNegocio> ideasUsanDesarrolloSostenible(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            List<IdeaDeNegocio> ideasDesarrolloSostenible = proyecto.seleccionarListaIdeasDeNegocio().Where(i => i.Impacto.ToLower().Contains("desarrollo sostenible")).ToList();
+            List<IdeaDeNegocio> ideasDesarrolloSostenible = ideasDeNegocio.Where(i => i.Impacto.ToLower().Contains("desarrollo sostenible")).ToList();
             return ideasDesarrolloSostenible;
         }
 
-        public List<IdeaDeNegocio> ideasRentabilidadMayorPromedio(Proyecto proyecto)
+        public List<IdeaDeNegocio> ideasRentabilidadMayorPromedio(List<IdeaDeNegocio> ideasDeNegocio)
         {
-            double promedio = proyecto.seleccionarListaIdeasDeNegocio().Average(i => i.TotalIngresos);
-            List<IdeaDeNegocio> ideasRentabilidadMayorPromedio = proyecto.seleccionarListaIdeasDeNegocio().Where(i => i.TotalIngresos > promedio).ToList();
+            double promedio = ideasDeNegocio.Average(i => i.TotalIngresos);
+            List<IdeaDeNegocio> ideasRentabilidadMayorPromedio = ideasDeNegocio.Where(i => i.TotalIngresos > promedio).ToList();
+
             return ideasRentabilidadMayorPromedio;
 
-
         }
+
+        public IdeaDeNegocio ideaMayorInversionInfraestructura(List<IdeaDeNegocio> ideasDeNegocio)
+        {
+
+
+            IdeaDeNegocio ideaMayorInversion = ideasDeNegocio.OrderByDescending(idea => idea.ValorInversionInfraestructura).FirstOrDefault();
+
+            return ideaMayorInversion;
+        }
+
+        public List<IdeaDeNegocio> ideasUsanTerritoriosOTransicion(List<IdeaDeNegocio> ideasDeNegocio)
+        {
+            List<IdeaDeNegocio> ideasUsanTerritoriosOTransicion = ideasDeNegocio.Where(i => i.Impacto.Contains("Transicion energetica") || i.Impacto.Contains("Territorios inteligentes") ).ToList();
+
+            return ideasUsanTerritoriosOTransicion;
+        }
+
+      
     }
 }

@@ -1,12 +1,46 @@
-﻿@model Proyecto3MVC.Models.Proyecto
-
+﻿@model List<Proyecto3MVC.Models.IdeaDeNegocio>
 @{
-    ViewBag.Title = "Innovacion";
+    ViewBag.Title = "Ideas De Negocio";
 }
 
-<main>
-    <h2>Proyecto innovacion<h2>
-        <p> aqui esta el proyecto</p>
-    <h3>Proyecto del gobierno nacional para apoyo a ideas de negocio colombianas.<h3>
+<h2>Ideas De Negocio </h2>
+<a class='btn btn-primary btn-sm' href='/Proyecto/RegistrarIdea'>Registrar idea de negocio</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Impacto social</th>
+            <th>Valor inversion</th>
+            <th>Total ingresos</th>
+            <th>Herramientas 4RI</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var idea in Model) 
+        {
+            <tr>
+                <td>@idea.Codigo</td>
+                <td>@idea.Nombre</td>
+                <td>@idea.Impacto</td>
+                <td>@idea.ValorInversion</td>
+                <td>@idea.TotalIngresos</td>
+                <td>
+                    <ul class="list-group">
+                        @foreach(var herramienta in idea.Herramientas4RI) 
+                        {
+                            <li>@herramienta</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Proyecto/EditarIdea">Editar </a>
+                    <a class="btn btn-primary btn-sm" href="/Proyecto/MostrarIdea">Ver</a>
+                </td>
+                
+            </tr>
+        } 
 
-</main>
+    </tbody>
+</table>
+

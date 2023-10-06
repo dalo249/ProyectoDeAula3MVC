@@ -1,5 +1,4 @@
-﻿using Microsoft.Ajax.Utilities;
-using Proyecto3MVC.Services;
+﻿using Proyecto3MVC.Services;
 using Proyecto3MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -12,19 +11,14 @@ namespace Proyecto3MVC.Controllers
 {
     public class ProyectoController : Controller
     {
-        Proyecto miProyecto = new Proyecto();
-        // GET: Proyecto
-        public ActionResult Index()
-        {
-  
-            return View(miProyecto);
-        }
 
-        public ActionResult IdeasDeNegocio() 
+        private static ListaIdeasDeNegocio listaIdeasDeNegocio = new ListaIdeasDeNegocio();
+
+        // GET: Lista de las ideas de negocio.
+      public ActionResult Index() 
         {
-            IEnumerable<IdeaDeNegocio> ideasDeNegocio = miProyecto.seleccionarListaIdeasDeNegocio();
-    
-            return View(ideasDeNegocio);
+            List<IdeaDeNegocio> ideas = listaIdeasDeNegocio.obtenerLista();
+            return View(ideas);
         }
         //Metodo Get: muestra formulario usuario llenar
         public ActionResult RegistrarIdea() 
@@ -36,31 +30,36 @@ namespace Proyecto3MVC.Controllers
         [HttpPost]
         public ActionResult BtnRegistrarIdea()
         {
-
-            if (Request.Form["Nombre"].Length == 0 || Request.Form["Impacto"].Length == 0 || Request.Form["Departamentos"].Length == 0 ||
-                Request.Form["ValorInversion"].Length == 0 || Request.Form["TotalIngresos"].Length == 0 || Request.Form["Herramientas4RI"].Length == 0) 
-            {
-                return Content("Debe llenar todos los campos requeridos.");
-            }
-
-
+            List<IdeaDeNegocio> ideas = listaIdeasDeNegocio.obtenerLista();
+            int codigo = ideas.Count + 1;
             string nombre = Request.Form["Nombre"].ToString();
             string impacto = Request.Form["Impacto"].ToString();
-            List<string> departamentos = new List<string>(Request.Form["Departamentos"].Split(','));
+            List<string> nombresDepartamentos = new List<string>(Request.Form["Departamentos"].Split(','));
             double valorInversion = Convert.ToDouble(Request.Form["ValorInversion"]);
             double totalIngresos = Convert.ToDouble(Request.Form["TotalIngresos"]);
+            double valorInversionEnInfraestructura = Convert.ToDouble(Request.Form["ValorInversionInfraestructura"]);
             List<string> herramientas4RI = new List<string>(Request.Form["Herramientas4RI"].Split(','));
 
-
-            bool registro = miProyecto.registrarIdeaNegocio(nombre, impacto, departamentos, valorInversion, totalIngresos, herramientas4RI);
-
-            if(registro) 
+            List<Departamento> departamentos = new List<Departamento>();
+            foreach(string nombreDepto in nombresDepartamentos) 
             {
-                IdeaDeNegocio ideaDeNegocio = miProyecto.buscarIdeaNegocioPorNombre(nombre);
-                miProyecto.agregarIdea(ideaDeNegocio);
-                return View(ideaDeNegocio);
+                int codigoDepto = ideas.Count;
+                Departamento depto = new Departamento(codigoDepto, nombreDepto);
+                departamentos.Add(depto);
             }
-            return Content("Error: El registro no fue realizado.");
+
+            if (valorInversion <= 0 || totalIngresos <= 0 || valorInversionEnInfraestructura <= 0)
+            {
+                throw new ValoresNumericosInvalidoException("Los valores de inversión, valor de ingresos y total ingreesos deben ser mayores que cero.");
+            }
+
+            IdeaDeNegocio idea = new IdeaDeNegocio(codigo, nombre, impacto, departamentos, valorInversion, totalIngresos,
+            valorInversionEnInfraestructura, herramientas4RI);
+            listaIdeasDeNegocio.agregarIdea(idea);
+
+
+            return View(idea);
+    
 
         }
        
@@ -73,6 +72,13 @@ namespace Proyecto3MVC.Controllers
 
         //Metodo Get: muestra el formulario para editar
         public ActionResult EditarIdea()
+        {
+
+            return View();
+        }
+
+        //Metodo Post: Actualiza las variables editadas por las nuevas.
+        public ActionResult btn_EditarIdea()
         {
             return View();
         }
