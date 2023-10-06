@@ -3,5 +3,50 @@
     ViewBag.Title = "Agregar Integrante";
 }
 
-<h2>AgregarIntegrante</h2>
+<h1>Nuevo integrante:</h1>
+<h2>Formulario para agregar Integrante</h2>
+
+@using (Html.BeginForm("btnAgregarIntegrante", "Proyecto", FormMethod.Post))
+{
+    <form asp-action="BtnAgregarIntegrante" asp-controller="Proyecto" method="post">
+        <input asp-for="CodigoIdea" type="hidden" class="form-control" />
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Id</label>
+            <div class="col-sm-6">
+                <input asp-for= "Id" type="text" class="form-control" >
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Nombre</label>
+            <div class="col-sm-6">
+                <input asp-for="Nombre" type="text" class="form-control" >
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Apellidos</label>
+            <div class="col-sm-6">
+                <input asp-for="Apellidos" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Rol</label>
+            <div class="col-sm-6">
+                <input asp-for="Rol" type="text" class="form-control" >
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-6">
+                <input asp-for="Email "type="text" class="form-control" >
+            </div>
+        </div>
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+        </div>
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <a class="btn btn-outline-primary" href="/Proyecto/Index" role="button">Cancelar</a>
+        </div>
+    </form>
+
+}
 

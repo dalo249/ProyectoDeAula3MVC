@@ -106,7 +106,7 @@ namespace Proyecto3MVC.Services
         {
             generarDepartamentos();
             generarHerramientas();
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 6; i++)
             {
                 List<IdeaDeNegocio> ideas = new List<IdeaDeNegocio>();
                 int codigo = generarCodigo();

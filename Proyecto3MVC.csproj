@@ -131,10 +131,11 @@
     <Compile Include="Models\Exceptions.cs" />
     <Compile Include="Models\IdeaDeNegocio.cs" />
     <Compile Include="Models\Integrante.cs" />
-    <Compile Include="Repositorio\IListaIdeasDeNegocioRepositorio.cs" />
-    <Compile Include="Repositorio\ListaIdeasDeNegocio.cs" />
+    <Compile Include="Comunicacion\IListaIdeasDeNegocioComunicacion.cs" />
+    <Compile Include="Comunicacion\ListaIdeasDeNegocio.cs" />
+    <Compile Include="Models\ViewModels\IdeaDeNegocioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositorio\ListaIdeasDeNegocioRepositorio.cs" />
+    <Compile Include="Comunicacion\ListaIdeasDeNegocioComunicacion.cs" />
     <Compile Include="Services\IdeasDeNegocioServices.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +198,7 @@
     <Content Include="Views\Proyecto\EjecutarEditarTotalIngresos.cshtml" />
     <Content Include="Views\Proyecto\AgregarIntegrante.cshtml" />
     <Content Include="Views\Proyecto\BtnAgregarIntegrante.cshtml" />
+    <Content Include="Views\Proyecto\BtnEditarIdea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

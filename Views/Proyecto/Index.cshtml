@@ -34,8 +34,9 @@
                     </ul>
                 </td>
                 <td>
-                    <a class="btn btn-primary btn-sm" href="/Proyecto/EditarIdea">Editar </a>
-                    <a class="btn btn-primary btn-sm" href="/Proyecto/MostrarIdea">Ver</a>
+                    @Html.ActionLink("Editar", "EditarIdea", new { codigo = idea.Codigo }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Ver", "MostrarIdea", new { codigo = idea.Codigo }, new { @class = "btn btn-primary" })
+
                 </td>
                 
             </tr>

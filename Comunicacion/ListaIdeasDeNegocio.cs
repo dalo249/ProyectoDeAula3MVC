@@ -40,11 +40,10 @@ namespace Proyecto3MVC.Repositorio
 
         }
 
-        public static void actualizarIdeaEditada(IdeaDeNegocio idea) 
+        public static void actualizarIdeaEditada(IdeaDeNegocio idea, double valorInversion, double totalIngresos) 
         {
-            IdeaDeNegocio ideaActualizada = IdeasDeNegocio.Find(i => i.Codigo == idea.Codigo);
-            ideaActualizada.ValorInversion = idea.ValorInversion;
-            ideaActualizada.TotalIngresos = idea.TotalIngresos;
+            idea.ValorInversion = valorInversion;
+            idea.TotalIngresos = totalIngresos;
 
         }
 
@@ -55,7 +54,12 @@ namespace Proyecto3MVC.Repositorio
             Integrante integrante = idea.Integrantes.Find(i => i.Id == integranteId);
             idea.Integrantes.Remove(integrante);
         }
-  
+
+        public static void agregarIntegrante(IdeaDeNegocio idea, Integrante integrante)
+        {
+            idea.Integrantes.Add(integrante);
+        }
+
 
 
 

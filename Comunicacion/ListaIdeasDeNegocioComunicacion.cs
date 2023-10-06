@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Proyecto3MVC.Repositorio
 {
-    public class ListaIdeasDeNegocioRepositorio : IListaIdeasDeNegocioRepositorio
+    public class ListaIdeasDeNegocioComunicacion : IListaIdeasDeNegocioComunicacion
     {
         public List<Models.IdeaDeNegocio> obtenerLista()
         {
@@ -25,15 +25,19 @@ namespace Proyecto3MVC.Repositorio
             ListaIdeasDeNegocio.agregarIdea(idea);
         }
 
-        public void actualizarIdeaEditada(Models.IdeaDeNegocio idea)
+        public void actualizarIdeaEditada(Models.IdeaDeNegocio idea, double valorInversion, double totalIngresos)
         {
-            ListaIdeasDeNegocio.actualizarIdeaEditada(idea);
+            ListaIdeasDeNegocio.actualizarIdeaEditada(idea, valorInversion, totalIngresos);
         }
 
-        public void eliminarIntegrante(int codigo, string integranteId) 
+        public void eliminarIntegrante(IdeaDeNegocio idea, string integranteId) 
         {
-            IdeaDeNegocio idea = buscarIdeaPorCodigo(codigo);
             ListaIdeasDeNegocio.eliminarIntegrante(idea, integranteId);
+        }
+
+        public void agregarIntegrante(IdeaDeNegocio idea, Integrante integrante) 
+        {
+            ListaIdeasDeNegocio.agregarIntegrante(idea, integrante);
         }
     }
 }

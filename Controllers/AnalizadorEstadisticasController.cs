@@ -13,7 +13,7 @@ namespace Proyecto3MVC.Controllers
     {
 
         AnalizadorEstadisticas analizador = new AnalizadorEstadisticas();
-        ListaIdeasDeNegocioRepositorio listaIdeas = new ListaIdeasDeNegocioRepositorio();
+        ListaIdeasDeNegocioComunicacion listaIdeas = new ListaIdeasDeNegocioComunicacion();
 
 
         public ActionResult Index()

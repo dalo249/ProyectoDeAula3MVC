@@ -1,4 +1,4 @@
-﻿@model Proyecto3MVC.Models.IdeaDeNegocio
+﻿@model Proyecto3MVC.Models.ViewModels.IdeaDeNegocioViewModel
 @{
     ViewBag.Title = "RegistrarIdeaDeNegocio";
 }
@@ -6,65 +6,59 @@
 <h1>Registrar Idea De Negocio</h1>
 <p> Rellena todos los campos para registrar una nueva idea de negocio </p>
 <br>
-@using (Html.BeginForm("btnRegistrarIdea", "Proyecto", FormMethod.Post))
-{
-    <form method="post">
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Nombre</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="Nombre" value="">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Impacto social</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="Impacto" value="">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Departamentos beneficiados <br>(Separados por comas)</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="Departamentos" value="">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Valor de inversion</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="ValorInversion" value="">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Total de ingresos ultimos 3 años</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="TotalIngresos" value="">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Valor de inversion <br>en infraestructuras</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="ValorInversionInfraestructura" value="">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Herramientas de 4RI<br>(separadas por comas)</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="Herramientas4RI" value="">
-            </div>
-        </div>
 
-        <div class="row mb-3">
-            <div class="offset-sm-3 col-sm-3 d-grid">
-                <button type="submit" class="btn btn-primary">Registrar</button>
-            </div>
-            <div class="col-sm-3 d-grid">
-                <a class="btn btn-outline-primary" href="/Proyecto/Index" role="button">Cancelar</a>
+
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("RegistrarIdea", "Proyecto", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+            @Html.ValidationMessage("Error", new { @class = "text-danger" })
+
+            @Html.AntiForgeryToken()
+
+            @Html.LabelFor(i => i.Nombre)
+            @Html.TextBoxFor(i => i.Nombre, new { @class = "form-control" })
+            @Html.ValidationMessage("Nombre", new { @class = "text-danger" })
+            <br>
+            @Html.LabelFor(i => i.Impacto)
+            @Html.TextBoxFor(i => i.Impacto, new { @class = "form-control" })
+            @Html.ValidationMessage("Impacto", new { @class = "text-danger" })
+            <br>
+            @Html.LabelFor(i => i.Departamentos)
+            @Html.TextBoxFor(i => i.Departamentos, new { @class = "form-control" })
+            @Html.ValidationMessage("Departamentos", new { @class = "text-danger" })
+            <br>
+            @Html.LabelFor(i => i.ValorInversion)
+            @Html.TextBoxFor(i => i.ValorInversion, new { @class = "form-control" })
+            @Html.ValidationMessage("ValorInversion", new { @class = "text-danger" })
+            <br>
+            @Html.LabelFor(i => i.TotalIngresos)
+            @Html.TextBoxFor(i => i.TotalIngresos, new { @class = "form-control" })
+            @Html.ValidationMessage("TotalIngresos", new { @class = "text-danger" })
+            <br>
+            @Html.LabelFor(i => i.ValorInversionInfraestructura)
+            @Html.TextBoxFor(i => i.ValorInversionInfraestructura, new { @class = "form-control" })
+            @Html.ValidationMessage("ValorInversionInfraestructura", new { @class = "text-danger" })
+            <br>
+            @Html.LabelFor(i => i.Herramientas4RI)
+            @Html.TextBoxFor(i => i.Herramientas4RI, new { @class = "form-control" })
+            @Html.ValidationMessage("Herramientas4RI", new { @class = "text-danger" })
+            <br>
+
+            <div style="text-align:right">
+                <input type="submit" class="btn btn-primary" value="Registrar" />
             </div>
 
-        </div>
 
-    </form>
+        }
 
-}
+    </div>
+         
+      
+
+
+</div>
 
 
 

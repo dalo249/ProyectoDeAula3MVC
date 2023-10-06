@@ -3,63 +3,111 @@
     ViewBag.Title = "Editar Idea";
 }
 
-<h1>Registrar Idea De Negocio</h1>
+<h1>Editar Idea De Negocio</h1>
 <p> Rellena todos los campos para registrar una nueva idea de negocio </p>
 <br>
-@using (Html.BeginForm("btnRegistrarIdea", "Proyecto", FormMethod.Post))
-{
-    <form method="post">
-        <input type="hidden" name="Codigo" value="@Model.IdeaDeNegocio.Codigo"
+
+<form method="post">
+    <intput typeof="hidden" name="codigo" value="@Model.Codigo">
+
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Nombre</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="Nombre" value="">
+                <label class="col-sm-3 col-form-label">@Model.Nombre</label>
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Impacto social</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="Impacto" value="">
+                <label class="col-sm-3 col-form-label">@Model.Impacto</label>
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Departamentos beneficiados <br>(Separados por comas)</label>
+            <label class="col-sm-3 col-form-label">Departamentos beneficiados</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="Departamentos" value="">
+                <ul class="list-group">
+                    @foreach (var departamento in Model.Departamentos)
+                    {
+                        <li>@departamento.Nombre</li>
+                    }
+                </ul>
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Valor de inversion</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="ValorInversion" value="">
+                <input type="text" class="form-control" name="ValorInversion" value="@Model.ValorInversion">
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">Total de ingresos ultimos 3 años</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="TotalIngresos" value="">
+                <input type="text" class="form-control" name="TotalIngresos" value="@Model.TotalIngresos">
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Herramientas de 4RI<br>(separadas por comas)</label>
+            <label class="col-sm-3 col-form-label">Valor de inversion <br> en infraestructura</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="Herramientas4RI" value="">
+                <label class="col-sm-3 col-form-label">@Model.ValorInversionInfraestructura</label>
             </div>
-        </div>
-
-        <p>ViewBag.mensajeError</p>
-        <p>ViewBag.mensajeExito</p>
-
-        <div class="row mb-3">
-            <div class="offset-sm-3 col-sm-3 d-grid">
-                <button type="submit" class="btn btn-primary">Registrar</button>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Herramientas de 4RI<br>(separadas por comas)</label>
+                <div class="col-sm-6">
+                    <ul class="list-group">
+                        @foreach (var herramienta in Model.Herramientas4RI)
+                        {
+                            <li>@herramienta</li>
+                        }
+                    </ul>
+                </div>
             </div>
-            <div class="col-sm-3 d-grid">
-                <a class="btn btn-outline-primary" href="/Proyecto/Index" role="button">Cancelar</a>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Integrantes</label>
+                @Html.ActionLink("Eliminar", "AgregarIntegrante", new { codigo = Model.Codigo }, new { @class = "btn btn-primary" })
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre Completo</th>
+                            <th>Rol</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var integrante in Model.Integrantes)
+                        {
+                            <tr>
+                                <td>@integrante.Id</td>
+                                <td>@integrante.Nombre @integrante.Apellidos</td>
+                                <td>@integrante.Rol</td>
+                                <td>@integrante.Email </td>
+                                <td>
+                                    @Html.ActionLink("Eliminar", "EliminarIntegrante", new { id = integrante.Id }, new { @class = "btn btn-primary" })
+                                </td>
+
+                            </tr>
+                        }
+
+                        </>
+                </table>
+
+            </div>
+            <div class="row mb-3">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    @Html.ActionLink("Enviar cambios", "BtnEditarIdea", new { codigo = Model.Codigo}, new { @class = "btn btn-primary" })
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a class="btn btn-outline-primary" href="/Proyecto/Index" role="button">Cancelar</a>
+                </div>
+
             </div>
 
-        </div>
 
-    </form>
 
-}
+</form>
+
+
+    
+
+
+
