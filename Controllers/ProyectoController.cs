@@ -79,47 +79,74 @@ namespace Proyecto3MVC.Controllers
         [HttpGet]
         public ActionResult EditarIdea(int codigo)
         {
+            var ideaVista = new EditarIdeaDeNegocioViewModel();
             IdeaDeNegocio idea = listaIdeas.buscarIdeaPorCodigo(codigo);
 
-            return View(idea);
+            ideaVista.Codigo = idea.Codigo;
+            ideaVista.ValorInversion = idea.ValorInversion;
+            ideaVista.TotalIngresos = idea.TotalIngresos;
+
+            return View(ideaVista);
         }
 
 
         //Metodo Post: Actualiza las variables editadas por las nuevas.
         [HttpPost]
-        public ActionResult EditarIdea()
+        public ActionResult EditarIdea(EditarIdeaDeNegocioViewModel ideaVista)
         {
-            return View();
+            if (!ModelState.IsValid) 
+            {
+                return View(ideaVista);
+            }
+
+            int codigo = ideaVista.Codigo;
+            double valorInversion = ideaVista.ValorInversion;
+            double totalIngresos = ideaVista.TotalIngresos;
+
+            IdeaDeNegocio idea = listaIdeas.buscarIdeaPorCodigo(codigo);
+            listaIdeas.actualizarIdeaEditada(idea, valorInversion, totalIngresos);
+
+            return RedirectToAction("Index");
         }
 
-        //Metodo Get: Muestra formulario para ingresar nuevos datos del integrante
-        public ActionResult AgregarIntegrante(int codigo)
+        public ActionResult MostrarIntegrantes(int codigo)
         {
             IdeaDeNegocio idea = listaIdeas.buscarIdeaPorCodigo(codigo);
             return View(idea);
         }
 
+        //Metodo Get: Muestra formulario para ingresar nuevos datos del integrante
+   
+        public ActionResult AgregarIntegrante(int codigo)
+        {
+            var integranteVista = new IntegranteIdeaDeNegocioViewModel();
+            integranteVista.Codigo = codigo;
+
+            return View(integranteVista);
+        }
+
         //Metodo Post: recibe datos y registra al nuevo integrante
         [HttpPost]
-        public ActionResult BtnAgregarIntegrante(IdeaDeNegocio idea )
+        public ActionResult BtnAgregarIntegrante(IntegranteIdeaDeNegocioViewModel integranteVista )
         {
-            string id = Request.Form["Id"];
-            string nombre = Request.Form["Nombre"];
-            string apellidos = Request.Form["Apellidos"];
-            string Rol = Request.Form["Rol"];
-            string Email = Request.Form["Email"];
 
-            Integrante integrante = new Integrante(id, nombre, apellidos, Rol, Email);
+            Integrante integrante = new Integrante(integranteVista.Id, integranteVista.Nombre, integranteVista.Apellidos,
+                integranteVista.Rol, integranteVista.Email);
+
+            IdeaDeNegocio idea = listaIdeas.buscarIdeaPorCodigo(integranteVista.Codigo);
+
             listaIdeas.agregarIntegrante(idea, integrante);
 
-            return View();
+            return View(idea);
         }
 
         //Metodo Get: Eliminar integrante, confirma elimino el integrante de la tabla
 
-        public ActionResult EliminarIntegrante() 
+        public ActionResult EliminarIntegrante(string id) 
         {
-            return View();
+            listaIdeas.eliminarIntegrante(id);
+
+            return Content("El integrante se elimino correctamente de la idea de negocio");
         }
 
 

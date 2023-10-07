@@ -30,9 +30,9 @@ namespace Proyecto3MVC.Repositorio
             ListaIdeasDeNegocio.actualizarIdeaEditada(idea, valorInversion, totalIngresos);
         }
 
-        public void eliminarIntegrante(IdeaDeNegocio idea, string integranteId) 
+        public void eliminarIntegrante( string integranteId) 
         {
-            ListaIdeasDeNegocio.eliminarIntegrante(idea, integranteId);
+            ListaIdeasDeNegocio.eliminarIntegrante(integranteId);
         }
 
         public void agregarIntegrante(IdeaDeNegocio idea, Integrante integrante) 

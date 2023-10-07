@@ -190,15 +190,11 @@
     <Content Include="Views\Proyecto\Index.cshtml" />
     <Content Include="Views\Proyecto\RegistrarIdea.cshtml" />
     <Content Include="Views\Proyecto\EditarIdea.cshtml" />
-    <Content Include="Views\Proyecto\BtnRegistrarIdea.cshtml" />
     <Content Include="Views\Proyecto\MostrarIdea.cshtml" />
-    <Content Include="Views\Proyecto\EditarValorInversion.cshtml" />
-    <Content Include="Views\Proyecto\EjecutarEditarValorInversion.cshtml" />
-    <Content Include="Views\Proyecto\EditarTotalIngresos.cshtml" />
-    <Content Include="Views\Proyecto\EjecutarEditarTotalIngresos.cshtml" />
     <Content Include="Views\Proyecto\AgregarIntegrante.cshtml" />
     <Content Include="Views\Proyecto\BtnAgregarIntegrante.cshtml" />
-    <Content Include="Views\Proyecto\BtnEditarIdea.cshtml" />
+    <Content Include="Views\Proyecto\MostrarIntegrantes.cshtml" />
+    <Content Include="Views\Proyecto\EliminarIntegrante.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

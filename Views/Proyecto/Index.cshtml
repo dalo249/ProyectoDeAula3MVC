@@ -34,6 +34,7 @@
                     </ul>
                 </td>
                 <td>
+                    @Html.ActionLink("Integrantes", "MostrarIntegrantes", new { codigo = idea.Codigo }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Editar", "EditarIdea", new { codigo = idea.Codigo }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Ver", "MostrarIdea", new { codigo = idea.Codigo }, new { @class = "btn btn-primary" })
 

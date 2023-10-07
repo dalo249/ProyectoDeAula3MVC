@@ -12,7 +12,7 @@ namespace Proyecto3MVC.Repositorio
         IdeaDeNegocio buscarIdeaPorCodigo(int codigo);
         void agregarIdea(IdeaDeNegocio idea);
         void actualizarIdeaEditada(IdeaDeNegocio idea, double valorInversion, double totalIngresos);
-        void eliminarIntegrante(IdeaDeNegocio idea, string integranteId);
+        void eliminarIntegrante(string integranteId);
         void agregarIntegrante(IdeaDeNegocio idea, Integrante integrante);
 
     }

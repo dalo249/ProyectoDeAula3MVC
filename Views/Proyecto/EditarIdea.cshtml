@@ -1,113 +1,36 @@
-﻿@model Proyecto3MVC.Models.IdeaDeNegocio
+﻿@model Proyecto3MVC.Models.ViewModels.EditarIdeaDeNegocioViewModel
 @{
     ViewBag.Title = "Editar Idea";
 }
 
 <h1>Editar Idea De Negocio</h1>
-<p> Rellena todos los campos para registrar una nueva idea de negocio </p>
+<p> Los campos autorizados para editar son: </p>
 <br>
 
-<form method="post">
-    <intput typeof="hidden" name="codigo" value="@Model.Codigo">
+@using (Html.BeginForm("EditarIdea", "Proyecto", FormMethod.Post, new { role = "form", @class = "" }))
+{
+    @Html.HiddenFor(i => i.Codigo)
+    @Html.AntiForgeryToken()
 
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Nombre</label>
-            <div class="col-sm-6">
-                <label class="col-sm-3 col-form-label">@Model.Nombre</label>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Impacto social</label>
-            <div class="col-sm-6">
-                <label class="col-sm-3 col-form-label">@Model.Impacto</label>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Departamentos beneficiados</label>
-            <div class="col-sm-6">
-                <ul class="list-group">
-                    @foreach (var departamento in Model.Departamentos)
-                    {
-                        <li>@departamento.Nombre</li>
-                    }
-                </ul>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Valor de inversion</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="ValorInversion" value="@Model.ValorInversion">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Total de ingresos ultimos 3 años</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="TotalIngresos" value="@Model.TotalIngresos">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Valor de inversion <br> en infraestructura</label>
-            <div class="col-sm-6">
-                <label class="col-sm-3 col-form-label">@Model.ValorInversionInfraestructura</label>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Herramientas de 4RI<br>(separadas por comas)</label>
-                <div class="col-sm-6">
-                    <ul class="list-group">
-                        @foreach (var herramienta in Model.Herramientas4RI)
-                        {
-                            <li>@herramienta</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Integrantes</label>
-                @Html.ActionLink("Eliminar", "AgregarIntegrante", new { codigo = Model.Codigo }, new { @class = "btn btn-primary" })
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre Completo</th>
-                            <th>Rol</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var integrante in Model.Integrantes)
-                        {
-                            <tr>
-                                <td>@integrante.Id</td>
-                                <td>@integrante.Nombre @integrante.Apellidos</td>
-                                <td>@integrante.Rol</td>
-                                <td>@integrante.Email </td>
-                                <td>
-                                    @Html.ActionLink("Eliminar", "EliminarIntegrante", new { id = integrante.Id }, new { @class = "btn btn-primary" })
-                                </td>
+    @Html.ValidationMessage("Error", new { @class = "text-danger" })
 
-                            </tr>
-                        }
-
-                        </>
-                </table>
-
-            </div>
-            <div class="row mb-3">
-                <div class="offset-sm-3 col-sm-3 d-grid">
-                    @Html.ActionLink("Enviar cambios", "BtnEditarIdea", new { codigo = Model.Codigo}, new { @class = "btn btn-primary" })
-                </div>
-                <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="/Proyecto/Index" role="button">Cancelar</a>
-                </div>
-
-            </div>
+    @Html.LabelFor(i => i.ValorInversion)
+    @Html.TextBoxFor(i => i.ValorInversion, new { @class = "form-control" })
+    @Html.ValidationMessage("ValorInversion", new { @class = "text-danger" })
+    <br>
+    @Html.LabelFor(i => i.TotalIngresos)
+    @Html.TextBoxFor(i => i.TotalIngresos, new { @class = "form-control" })
+    @Html.ValidationMessage("TotalIngresos", new { @class = "text-danger" })
+    <br>
+ 
+    <div style="text-align:right" display="flex">
+        <input onclick="document.location.href='@Url.Content("~/Proyecto/EditarIdea"+Model.Codigo)'" type="submit" class="btn btn-primary" value="Confirmar" />
+    </div>
 
 
 
-</form>
+}
 
-
-    
 
 
 

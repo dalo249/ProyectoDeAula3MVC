@@ -1,6 +1,6 @@
 ﻿@model Proyecto3MVC.Models.IdeaDeNegocio
 @{
-    ViewBag.Title = "Btn Agregar Integrante";
+    ViewBag.Title = "EliminarIntegrante";
 }
 
 
@@ -8,7 +8,7 @@
 {
     <body>
 
-        <h2>Se agrego el integrante correctamente a la idea de negocio @Model.Nombre</h2>
+        <h2>El integrante de la idea de negocio @Model.Nombre se elimino correctamente</h2>
         <br>
         @Html.ActionLink("Agregar integrante", "AgregarIntegrante", new { codigo = Model.Codigo }, new { @class = "btn btn-primary" })
         <br>
@@ -48,6 +48,9 @@
                             <td>@integrante.Nombre @integrante.Apellidos</td>
                             <td>@integrante.Rol</td>
                             <td>@integrante.Email </td>
+                            <td>
+                                @Html.ActionLink("Eliminar", "EliminarIntegrante", new { codigo = Model.Codigo }, new { @class = "btn btn-primary" })
+                            </td>
 
                         </tr>
                     }

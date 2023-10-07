@@ -1,4 +1,4 @@
-﻿
+﻿@model Proyecto3MVC.Models.ViewModels.IntegranteIdeaDeNegocioViewModel
 @{
     ViewBag.Title = "Agregar Integrante";
 }
@@ -6,47 +6,37 @@
 <h1>Nuevo integrante:</h1>
 <h2>Formulario para agregar Integrante</h2>
 
-@using (Html.BeginForm("btnAgregarIntegrante", "Proyecto", FormMethod.Post))
+@using (Html.BeginForm("BtnAgregarIntegrante", "Proyecto", FormMethod.Post))
 {
-    <form asp-action="BtnAgregarIntegrante" asp-controller="Proyecto" method="post">
-        <input asp-for="CodigoIdea" type="hidden" class="form-control" />
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Id</label>
-            <div class="col-sm-6">
-                <input asp-for= "Id" type="text" class="form-control" >
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Nombre</label>
-            <div class="col-sm-6">
-                <input asp-for="Nombre" type="text" class="form-control" >
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Apellidos</label>
-            <div class="col-sm-6">
-                <input asp-for="Apellidos" type="text" class="form-control">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Rol</label>
-            <div class="col-sm-6">
-                <input asp-for="Rol" type="text" class="form-control" >
-            </div>
-        </div>
-        <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Email</label>
-            <div class="col-sm-6">
-                <input asp-for="Email "type="text" class="form-control" >
-            </div>
-        </div>
-        <div class="offset-sm-3 col-sm-3 d-grid">
-            <button type="submit" class="btn btn-primary">Agregar</button>
-        </div>
-        <div class="offset-sm-3 col-sm-3 d-grid">
-            <a class="btn btn-outline-primary" href="/Proyecto/Index" role="button">Cancelar</a>
-        </div>
-    </form>
+    @Html.HiddenFor(i => i.Codigo)
+    @Html.AntiForgeryToken()
 
+    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+
+    @Html.LabelFor(i => i.Id)
+    @Html.TextBoxFor(i => i.Id, new { @class = "form-control" })
+    @Html.ValidationMessage("Id", new { @class = "text-danger" })
+    <br>
+
+    @Html.LabelFor(i => i.Nombre)
+    @Html.TextBoxFor(i => i.Nombre, new { @class = "form-control" })
+    @Html.ValidationMessage("Nombre", new { @class = "text-danger" })
+    <br>
+    @Html.LabelFor(i => i.Apellidos)
+    @Html.TextBoxFor(i => i.Apellidos, new { @class = "form-control" })
+    @Html.ValidationMessage("Apellidos", new { @class = "text-danger" })
+    <br>
+    @Html.LabelFor(i => i.Rol)
+    @Html.TextBoxFor(i => i.Rol, new { @class = "form-control" })
+    @Html.ValidationMessage("Rol", new { @class = "text-danger" })
+    <br>
+    @Html.LabelFor(i => i.Email)
+    @Html.TextBoxFor(i => i.Email, new { @class = "form-control" })
+    @Html.ValidationMessage("Email", new { @class = "text-danger" })
+    <br>
+
+    <div style="text-align:right" display="flex">
+        <input onclick="document.location.href='@Url.Content("~/Proyecto/BtnAgregarIntegrante")'" type="submit" class="btn btn-primary" value="Agregar" />
+    </div>
 }
 

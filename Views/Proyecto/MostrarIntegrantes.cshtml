@@ -1,0 +1,41 @@
+﻿@model Proyecto3MVC.Models.IdeaDeNegocio
+@{
+    ViewBag.Title = "Lista de integrantes de la idea de negocio ";
+}
+
+<h2>@ViewBag.Title</h2>
+<br>
+@Html.ActionLink("Agregar integrante", "AgregarIntegrante", new { codigo = Model.Codigo }, new { @class = "btn btn-primary" })
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Rol</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Proyecto3MVC.Models.Integrante integrante in Model.Integrantes)
+        {
+            <tr>
+                <td>@integrante.Id</td>
+                <td>@integrante.Nombre </td>
+                <td>@integrante.Apellidos</td>
+                <td>@integrante.Rol</td>
+                <td>@integrante.Email </td>
+                <td>
+                    @Html.ActionLink("Eliminar", "EliminarIntegrante", new { id = integrante.Id }, new { @class = "btn btn-danger" })
+                </td>
+                    
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

@@ -47,12 +47,15 @@ namespace Proyecto3MVC.Repositorio
 
         }
 
-        public static void eliminarIntegrante(IdeaDeNegocio idea, string integranteId)
+        public static void eliminarIntegrante(string integranteId)
         {
 
-            int integranteIdInt = int.Parse(integranteId);
-            Integrante integrante = idea.Integrantes.Find(i => i.Id == integranteId);
-            idea.Integrantes.Remove(integrante);
+            foreach(IdeaDeNegocio idea in IdeasDeNegocio) 
+            {
+                Integrante integrante = idea.Integrantes.Find(i => i.Id == integranteId);
+                idea.Integrantes.Remove(integrante);
+            }
+            
         }
 
         public static void agregarIntegrante(IdeaDeNegocio idea, Integrante integrante)
